@@ -13,23 +13,45 @@ client.on("ready", () => {
   console.log(`${client.user.username} has started 🚀`);
 });
 
+const reactions = ["💜", "💚", "💙", "💛"];
+
+const addReactions = (message, reactions) => {
+  for (const reaction of reactions) {
+    message.react(reaction);
+    setTimeout(() => {
+      addReactions(message, reactions);
+    }, 750);
+  }
+};
+
 client.on("message", async (message) => {
   if (
-    message.content === "BAD" ||
-    message.content === "bad" ||
-    message.content === "Bad" ||
-    message.content === "F"
+    message.content.toLowerCase() === "bad" ||
+    message.content.toLowerCase() === "f"
   ) {
-    message.reply({
+    message.delete();
+
+    message.reply("**Sorry but**", {
       embed: {
         color: "#F32424",
-        title: `${message.author.username} , Oops! You cannot say that! `,
+        title: `**${message.author.username} , Oops! You cannot say that!**`,
         description: "Please take care of such words in the future!",
+        image: {
+          url: "https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif",
+        },
+
         footer: {
           text: "The-Expert-Waffle 🔨",
         },
       },
     });
+  } else if (
+    message.content.toLowerCase() === "good morning" ||
+    message.content.toLowerCase() === "good afternoon" ||
+    message.content.toLowerCase() === "good evening" ||
+    message.content.toLowerCase() === "good night"
+  ) {
+    addReactions(message, reactions);
   }
 });
 
