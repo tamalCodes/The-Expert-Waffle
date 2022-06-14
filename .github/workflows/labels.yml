@@ -16,6 +16,6 @@ jobs:
         with:
           github-token: ${{ secrets.NPM_TOKEN }}
           owner-name: "IAmTamal"
-          repository-name: "The-Expert-Waffle"
+          repository-name: "TheExpertWaffle"
           force: true
           # force: true # optional to clear existing labels, default to true
