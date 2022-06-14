@@ -1,0 +1,25 @@
+{
+  "name": "the-expert-waffle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IAmTamal/The-Expert-Waffle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.16"
+  },
+  "bugs": {
+    "url": "https://github.com/IAmTamal/The-Expert-Waffle/issues"
+  },
+  "homepage": "https://github.com/IAmTamal/The-Expert-Waffle#readme"
+}
