@@ -8,10 +8,6 @@
     "color": "7f0799"
   },
   {
-    "name": "duplicate",
-    "color": "7f0799"
-  },
-  {
     "name": "⛔️ status: discarded",
     "color": "eeeeee"
   },
@@ -88,14 +84,6 @@
     "color": "666666"
   },
   {
-    "name": "🙅 status: discontinued",
-    "color": "cccccc"
-  },
-  {
-    "name": "🏷 status: label work required",
-    "color": "666666"
-  },
-  {
     "name": "🔢 points: 1",
     "color": "62A1A6"
   },
@@ -118,21 +106,5 @@
   {
     "name": "🔢 points: 13",
     "color": "62A1A6"
-  },
-  {
-    "name": "no-issue-activity",
-    "color": "ededed"
-  },
-  {
-    "name": "dependencies",
-    "color": "0366d6"
-  },
-  {
-    "name": "hacktoberfest",
-    "color": "eb06b0"
-  },
-  {
-    "name": "hacktoberfest-accepted",
-    "color": "0f8b16"
   }
 ]
