@@ -1,4 +1,5 @@
-//* This is the commands page so that we can handle most of the commands here instead of clogging up the Bot.js file
+//* This is the commands page so that we can handle most of the commands here
+//* This page is done in order to the perfect message
 
 const { prefix } = require("../config.json");
 
