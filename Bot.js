@@ -7,7 +7,6 @@ const client = new Client({
   intents: 131071,
 });
 const command = require("./src/Command");
-const firstMessage = require("./src/FirstMessage");
 
 // at the top of your file
 const { MessageEmbed } = require("discord.js");
@@ -21,11 +20,6 @@ const { MessageEmbed } = require("discord.js");
 
 client.on("ready", () => {
   console.log(`${client.user.username} has started 🚀`);
-  firstMessage(client, process.env.DISCORD_RULES_ID, "hello world", [
-    "🔥",
-    "🚀",
-    "👩‍🎤",
-  ]);
 
   //* !ping
 
