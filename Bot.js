@@ -3,7 +3,9 @@ require("dotenv").config();
 // client helps us interact with the discord API
 
 const { Client, codeBlock } = require("discord.js");
-const client = new Client({ intents: 131071 });
+const client = new Client({
+  intents: 131071,
+});
 const command = require("./src/Command");
 
 // at the top of your file
@@ -19,17 +21,17 @@ const { MessageEmbed } = require("discord.js");
 client.on("ready", () => {
   console.log(`${client.user.username} has started 🚀`);
 
+  //* !ping
+
   command(client, "ping", (message) => {
     message.reply("PONG 🥎");
     message.react("🥎");
   });
 
+  //* !mbc
+
   command(client, "mbc", (message) => {
     client.guilds.cache.forEach((guild) => {
-      // message.reply(
-      //   `**${guild.name}** has a total of **${guild.memberCount}** members 📈`
-      // );
-
       message.channel.send({
         embeds: [
           new MessageEmbed(guild)
@@ -50,6 +52,43 @@ client.on("ready", () => {
         ],
       });
     });
+  });
+
+  //* !clearch
+
+  command(client, "clearch", (message) => {
+    if (message.member.permissions.has("ADMINISTRATOR")) {
+
+      message.channel.messages.fetch()
+        .then((results) => {
+
+          console.log(results.size);
+          message.channel.bulkDelete(results);
+
+          message.channel.send({
+            embeds: [
+              new MessageEmbed()
+                .setColor("#F7EC09")
+                .setTitle("**Texts Deleted 🔨**")
+                .setAuthor({
+                  name: `${client.user.username}`,
+                  iconURL: `${client.user.avatarURL()}`,
+                })
+                .setDescription(
+                  `**Deleted the last 100 messages 👨‍🔧**`
+                )
+
+            ],
+
+          })
+
+
+
+          // console.log(results);
+          // 
+
+        });
+    }
   });
 });
 
