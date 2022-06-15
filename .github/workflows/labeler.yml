@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # https://github.com/marketplace/actions/pr-labeler-based-on-multiple-rules
-      - uses: srvaroa/labeler@v0.8
+      - uses: srvaroa/labeler@master
         with:
           config_path: .github/labeler_config.yml
         env:

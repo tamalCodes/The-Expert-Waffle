@@ -1,19 +1,24 @@
 version: 1
 labels:
   - label: "💻 aspect: code"
+    title: ".*"
     color: "#04338c"
 
   - label: "Completed ✅"
+    title: ".*"
     color: "#048F10"
 
   - label: "fix"
     color: "#9FC6CF"
 
   - label: "✨ goal: improvement"
+    title: ".*"
     color: "#ffffff"
 
   - label: "⭐ goal: addition"
+    title: ".*"
     color: "#ffffff"
 
   - label: "🟨 priority: medium"
+    title: ".*"
     color: "#ffcc00"
