@@ -19,7 +19,10 @@ module.exports = (client, aliases, callback) => {
 
       // we made startsWith(`${command} `) so that it works on !ping and not on !pinging
 
-      if (content.startsWith(`${command} `) || commandcontent === command) {
+      if (
+        commandcontent.startsWith(`${command} `) ||
+        commandcontent === command
+      ) {
         callback(message);
       }
     });
