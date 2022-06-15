@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/Bot.js",
-    "dev": "nodemon ./src/Bot.js"
+    "start": "node Bot.js",
+    "dev": "nodemon Bot.js"
   },
   "repository": {
     "type": "git",
