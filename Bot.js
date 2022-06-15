@@ -32,26 +32,25 @@ client.on("ready", () => {
 
   command(client, "mbc", (message) => {
     client.guilds.cache.forEach((guild) => {
-      message.reply(`${guild.memberCount}`);
-      // message.channel.send({
-      //   embeds: [
-      //     new MessageEmbed(guild)
-      //       .setColor("#0099ff")
-      //       .setTitle("**Member count**")
-      //       .setAuthor({
-      //         name: `${guild.name}`,
-      //         iconURL: `${guild.iconURL()}`,
-      //       })
-      //       .setDescription(
-      //         `**${guild.name}** has a total of **${guild.memberCount}** members 📈`
-      //       )
-      //       .setThumbnail(`${guild.iconURL()}`)
-      //       .setFooter({
-      //         text: `${client.user.username}`,
-      //         iconURL: `${client.user.avatarURL()}`,
-      //       }),
-      //   ],
-      // });
+      message.channel.send({
+        embeds: [
+          new MessageEmbed(guild)
+            .setColor("#0099ff")
+            .setTitle("**Member count**")
+            .setAuthor({
+              name: `${guild.name}`,
+              iconURL: `${guild.iconURL()}`,
+            })
+            .setDescription(
+              `**${guild.name}** has a total of **${guild.memberCount}** members 📈`
+            )
+            .setThumbnail(`${guild.iconURL()}`)
+            .setFooter({
+              text: `${client.user.username}`,
+              iconURL: `${client.user.avatarURL()}`,
+            }),
+        ],
+      });
     });
   });
 
@@ -59,37 +58,35 @@ client.on("ready", () => {
 
   command(client, "clearch", (message) => {
     if (message.member.permissions.has("ADMINISTRATOR")) {
+      message.channel.messages.fetch().then((results) => {
+        console.log(results.size);
+        message.channel.bulkDelete(results);
 
-      message.channel.messages.fetch()
-        .then((results) => {
-
-          console.log(results.size);
-          message.channel.bulkDelete(results);
-
-          message.channel.send({
-            embeds: [
-              new MessageEmbed()
-                .setColor("#F7EC09")
-                .setTitle("**Texts Deleted 🔨**")
-                .setAuthor({
-                  name: `${client.user.username}`,
-                  iconURL: `${client.user.avatarURL()}`,
-                })
-                .setDescription(
-                  `**Deleted the last 100 messages 👨‍🔧**`
-                )
-
-            ],
-
-          })
-
-
-
-          // console.log(results);
-          // 
-
+        message.channel.send({
+          embeds: [
+            new MessageEmbed()
+              .setColor("#F7EC09")
+              .setTitle("**Texts Deleted 🔨**")
+              .setAuthor({
+                name: `${client.user.username}`,
+                iconURL: `${client.user.avatarURL()}`,
+              })
+              .setDescription(`**Deleted the last 100 messages 👨‍🔧**`),
+          ],
         });
+
+        // console.log(results);
+        //
+      });
     }
+  });
+
+  //* !status hello world
+
+  command(client, "status", (message) => {
+    const content = message.content.replace("!status ", "");
+
+    client.user.setPresence({ activities: [{ name: content }] });
   });
 });
 
