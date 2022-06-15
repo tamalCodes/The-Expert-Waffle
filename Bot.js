@@ -7,6 +7,8 @@ const client = new Client({
   intents: 131071,
 });
 const command = require("./src/Command");
+const autodetect = require("./src/Automessage");
+const profilecommand = require("./src/AdminProfile");
 
 // at the top of your file
 const { MessageEmbed } = require("discord.js");
@@ -20,6 +22,7 @@ const { MessageEmbed } = require("discord.js");
 
 client.on("ready", () => {
   console.log(`${client.user.username} has started 🚀`);
+  autodetect(client);
 
   //* !ping
 
@@ -88,6 +91,9 @@ client.on("ready", () => {
 
     client.user.setPresence({ activities: [{ name: content }] });
   });
+
+  //* !waffle
+  profilecommand(client, "waffle");
 });
 
 client.login(process.env.DISCORDJS_BOT_TOKEN);
