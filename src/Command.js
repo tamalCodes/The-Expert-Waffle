@@ -11,12 +11,15 @@ module.exports = (client, aliases, callback) => {
   client.on("message", (message) => {
     const { content } = message;
 
+    const commandcontent = content.toLowerCase();
+
     aliases.forEach((alias) => {
-      const command = `${prefix}${alias}`;
+      const initialcommand = `${prefix}${alias}`;
+      const command = initialcommand.toLowerCase();
 
       // we made startsWith(`${command} `) so that it works on !ping and not on !pinging
 
-      if (content.startsWith(`${command} `) || content === command) {
+      if (content.startsWith(`${command} `) || commandcontent === command) {
         callback(message);
       }
     });
