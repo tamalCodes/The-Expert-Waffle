@@ -32,25 +32,26 @@ client.on("ready", () => {
 
   command(client, "mbc", (message) => {
     client.guilds.cache.forEach((guild) => {
-      message.channel.send({
-        embeds: [
-          new MessageEmbed(guild)
-            .setColor("#0099ff")
-            .setTitle("**Member count**")
-            .setAuthor({
-              name: `${guild.name}`,
-              iconURL: `${guild.iconURL()}`,
-            })
-            .setDescription(
-              `**${guild.name}** has a total of **${guild.memberCount}** members 📈`
-            )
-            .setThumbnail(`${guild.iconURL()}`)
-            .setFooter({
-              text: `${client.user.username}`,
-              iconURL: `${client.user.avatarURL()}`,
-            }),
-        ],
-      });
+      message.reply(`${guild.memberCount}`);
+      // message.channel.send({
+      //   embeds: [
+      //     new MessageEmbed(guild)
+      //       .setColor("#0099ff")
+      //       .setTitle("**Member count**")
+      //       .setAuthor({
+      //         name: `${guild.name}`,
+      //         iconURL: `${guild.iconURL()}`,
+      //       })
+      //       .setDescription(
+      //         `**${guild.name}** has a total of **${guild.memberCount}** members 📈`
+      //       )
+      //       .setThumbnail(`${guild.iconURL()}`)
+      //       .setFooter({
+      //         text: `${client.user.username}`,
+      //         iconURL: `${client.user.avatarURL()}`,
+      //       }),
+      //   ],
+      // });
     });
   });
 
