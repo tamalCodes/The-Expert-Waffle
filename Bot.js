@@ -23,6 +23,7 @@ const { MessageEmbed } = require("discord.js");
 
 client.on("ready", () => {
   console.log(`${client.user.username} has started 🚀`);
+  autodetect(client);
 
   //* Automations
 
