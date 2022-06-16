@@ -9,6 +9,7 @@ const client = new Client({
 const command = require("./src/Command");
 const autodetect = require("./src/Automessage");
 const profilecommand = require("./src/AdminProfile");
+const roleClaim = require("./src/RoleClaims");
 
 // at the top of your file
 const { MessageEmbed } = require("discord.js");
@@ -22,7 +23,11 @@ const { MessageEmbed } = require("discord.js");
 
 client.on("ready", () => {
   console.log(`${client.user.username} has started 🚀`);
+
+  //* Automations
+
   autodetect(client);
+  roleClaim(client);
 
   //* !ping
 
@@ -93,7 +98,44 @@ client.on("ready", () => {
   });
 
   //* !waffle
+
   profilecommand(client, "waffle");
+
+  //* !help
+
+  command(client, "help", (message) => {
+    const exampleEmbed = {
+      color: "#AB46D2",
+      title: "Commands i offer 🛠",
+      fields: [
+        { name: "\u200B", value: "\u200B" },
+        {
+          name: "🍕 `!ping`",
+          value: "I will reply you with Pong XD\v\v",
+        },
+        { name: "\u200B", value: "\u200B" },
+        {
+          name: "🍕 `!clearch`",
+          value: "I clear out the last 100 texts",
+        },
+        { name: "\u200B", value: "\u200B" },
+        {
+          name: "🍕 `!mbc`",
+          value: "I will tell you the total members",
+        },
+        { name: "\u200B", value: "\u200B" },
+        {
+          name: "🍕 `!waffle`",
+          value: "I will boast about my creator",
+        },
+      ],
+      footer: {
+        text: "The-Expert-Waffle 🦇",
+        iconURL: "https://i.ibb.co/WPy4zGM/neonwomanglasses.jpg",
+      },
+    };
+    message.reply({ embeds: [exampleEmbed] });
+  });
 });
 
 client.login(process.env.DISCORDJS_BOT_TOKEN);
