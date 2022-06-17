@@ -23,9 +23,9 @@ module.exports = (client) => {
 
   firstMessage(client, process.env.BOT_ROLES_CHANNEL_ID, emojiText, reactions);
 
-  //* Here we handle the roles as per as the emoji name
-  //* It is better if the name of the Roles and the name of the Emoji is same
-  //* We can destructure the guild from the message and as a result we can also find out the roles from there
+  // Here we handle the roles as per as the emoji name
+  // It is better if the name of the Roles and the name of the Emoji is same
+  // We can destructure the guild from the message and as a result we can also find out the roles from there
 
   const handleRoles = (reaction, user, add) => {
     if (user.id === process.env.BOT_OWN_ID) {
@@ -35,8 +35,8 @@ module.exports = (client) => {
     const emoji = reaction.emoji.name;
     const { guild } = reaction.message;
 
-    //* Getting the rolename and basically removing bold and next lines from it
-    //* this is done so that rolename and The guild roles are same
+    // Getting the rolename and basically removing bold and next lines from it
+    // this is done so that rolename and The guild roles are same
 
     const initial_rolename = emojis[emoji];
     const initial_rolename2 = initial_rolename.replace("**", "");
