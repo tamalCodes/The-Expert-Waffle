@@ -25,19 +25,19 @@ client.on("ready", () => {
   console.log(`${client.user.username} has started 🚀`);
   autodetect(client);
 
-  //* Automations
+  // Automations
 
   autodetect(client);
   roleClaim(client);
 
-  //* !ping
+  // ping
 
   command(client, "ping", (message) => {
     message.reply("PONG 🥎");
     message.react("🥎");
   });
 
-  //* !mbc
+  // mbc
 
   command(client, "mbc", (message) => {
     client.guilds.cache.forEach((guild) => {
@@ -63,7 +63,7 @@ client.on("ready", () => {
     });
   });
 
-  //* !clearch
+  // clearch
 
   command(client, "clearch", (message) => {
     if (message.member.permissions.has("ADMINISTRATOR")) {
@@ -90,7 +90,7 @@ client.on("ready", () => {
     }
   });
 
-  //* !status hello world
+  // status hello world
 
   command(client, "status", (message) => {
     const content = message.content.replace("!status ", "");
@@ -98,11 +98,11 @@ client.on("ready", () => {
     client.user.setPresence({ activities: [{ name: content }] });
   });
 
-  //* !waffle
+  // waffle
 
   profilecommand(client, "waffle");
 
-  //* !help
+  // help
 
   command(client, "help", (message) => {
     const exampleEmbed = {
@@ -136,6 +136,74 @@ client.on("ready", () => {
       },
     };
     message.reply({ embeds: [exampleEmbed] });
+  });
+
+  // ban
+
+  command(client, "ban", (message) => {
+    const { member, mentions } = message;
+
+    if (
+      member.permissions.has("ADMINISTRATOR") ||
+      member.permissions.has("BAN_MEMBERS") ||
+      member.permissions.has("KICK_MEMBERS")
+    ) {
+      const target = mentions.users.first();
+
+      if (target) {
+        const banmember = message.guild.members.cache.get(target.id);
+        const banmember_user = banmember.user.username;
+
+        client.users.fetch(target.id).then((user) => {
+          try {
+            user.send("You have been banned !! ").then(() => {
+              message.guild.members.cache.get(target.id).ban();
+            });
+          } catch (err) {
+            console.log("err");
+          }
+        });
+      } else {
+        message.author.send("IDK whom to ban sir");
+      }
+    } else {
+      message.delete();
+      message.author.send(`<@${member.id}> You donot have such permissions !!`);
+    }
+  });
+
+  // kick
+
+  command(client, "kick", (message) => {
+    const { member, mentions } = message;
+
+    if (
+      member.permissions.has("ADMINISTRATOR") ||
+      member.permissions.has("BAN_MEMBERS") ||
+      member.permissions.has("KICK_MEMBERS")
+    ) {
+      const target = mentions.users.first();
+
+      if (target) {
+        const banmember = message.guild.members.cache.get(target.id);
+        const banmember_user = banmember.user.username;
+
+        client.users.fetch(target.id).then((user) => {
+          try {
+            user.send("You have been kicked !! ").then(() => {
+              message.guild.members.cache.get(target.id).kick();
+            });
+          } catch (err) {
+            console.log("err");
+          }
+        });
+      } else {
+        message.author.send("IDK whom to kick sir");
+      }
+    } else {
+      message.delete();
+      message.author.send(`<@${member.id}> You donot have such permissions !!`);
+    }
   });
 });
 
