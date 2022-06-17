@@ -10,9 +10,11 @@ const command = require("./src/Command");
 const autodetect = require("./src/Automessage");
 const profilecommand = require("./src/AdminProfile");
 const roleClaim = require("./src/RoleClaims");
+const poll = require("./src/Poll");
 
 // at the top of your file
 const { MessageEmbed } = require("discord.js");
+const Welcome = require("./src/Welcome");
 
 // inside a command, event listener, etc.
 // const exampleEmbed =
@@ -24,6 +26,8 @@ const { MessageEmbed } = require("discord.js");
 client.on("ready", () => {
   console.log(`${client.user.username} has started 🚀`);
   autodetect(client);
+  poll(client);
+  Welcome(client);
 
   // Automations
 
