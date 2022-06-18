@@ -11,10 +11,12 @@ const autodetect = require("./src/Automessage");
 const profilecommand = require("./src/AdminProfile");
 const roleClaim = require("./src/RoleClaims");
 const poll = require("./src/Poll");
+const connectToDb = require("./database/Db");
 
 // at the top of your file
 const { MessageEmbed } = require("discord.js");
 const Welcome = require("./src/Welcome");
+const { default: mongoose } = require("mongoose");
 
 // inside a command, event listener, etc.
 // const exampleEmbed =
@@ -23,11 +25,22 @@ const Welcome = require("./src/Welcome");
 // for that i will be using an event listener which listens to the client side if it is "ready" or not
 //client.user.username is basically the name of the bot
 
-client.on("ready", () => {
+client.on("ready", async () => {
   console.log(`${client.user.username} has started 🚀`);
   autodetect(client);
   poll(client);
   Welcome(client);
+
+  // database
+  await connectToDb().then((mongoose) => {
+    try {
+      console.log("DB WAS CONNECTED 🔐");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      mongoose.connection.close();
+    }
+  });
 
   // Automations
 
