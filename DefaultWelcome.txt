@@ -1,36 +1,32 @@
-// const { MessageEmbed } = require("discord.js");
+ client.on("guildMemberAdd", (member) => {
+      const { user, guild } = member;
 
-// module.exports = (client) => {
-//   client.on("guildMemberAdd", (member) => {
-//     const { user, guild } = member;
+      if (!user) {
+        return;
+      }
 
-//     if (!user) {
-//       return;
-//     }
+      const channel = member.guild.channels.cache.get(
+        process.env.BOT_WELCOME_CHANNEL_ID
+      );
 
-//     const channel = member.guild.channels.cache.get(
-//       process.env.BOT_WELCOME_CHANNEL_ID
-//     );
+      const exampleEmbed = new MessageEmbed()
+        .setColor("#0099ff")
+        .setTitle("A new member has joined our guild !!")
+        .setAuthor({
+          name: user.tag,
+          iconURL: user.displayAvatarURL(),
+        })
+        .setDescription(
+          `Hello ${
+            user.username
+          } , welcome to Hustlers. I am the Expert waffle. Start with some ${guild.channels.cache
+            .get(process.env.BOT_START_WITH_ID)
+            .toString()} , and have fun.`
+        )
+        .setFooter({
+          text: `ID: ${user.id}`,
+        })
+        .setTimestamp();
 
-//     const exampleEmbed = new MessageEmbed()
-//       .setColor("#0099ff")
-//       .setTitle("A new member has joined our guild !!")
-//       .setAuthor({
-//         name: user.tag,
-//         iconURL: user.displayAvatarURL(),
-//       })
-//       .setDescription(
-//         `Hello ${
-//           user.username
-//         } , welcome to Hustlers. I am the Expert waffle. Start with some ${guild.channels.cache
-//           .get(process.env.BOT_START_WITH_ID)
-//           .toString()} , and have fun.`
-//       )
-//       .setFooter({
-//         text: `ID: ${user.id}`,
-//       })
-//       .setTimestamp();
-
-//     channel.send({ embeds: [exampleEmbed] });
-//   });
-// };
+      channel.send({ embeds: [exampleEmbed] });
+    });

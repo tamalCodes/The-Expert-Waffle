@@ -1,6 +1,7 @@
 const mongo = require("../database/Db");
 const command = require("./Command");
 const welcomeSchema = require("../models/WelcomeSchema");
+const { MessageEmbed } = require("discord.js");
 
 //^ !setwelcome <write the welcome message in here>
 
@@ -90,7 +91,7 @@ module.exports = (client) => {
     channel.send(text.replace(/<@>/g, `<@${member.id}>`));
   };
 
-  command(client, "simjoin", (message) => {
+  command(client, "simjoin", async (message) => {
     if (!message.member.permissions.has("ADMINISTRATOR")) {
       message.delete();
 
@@ -99,10 +100,70 @@ module.exports = (client) => {
       return;
     }
 
-    onJoin(message.member);
+    await mongo().then(async (mongoose) => {
+      const { user, guild } = message.member;
+      const { channel } = message;
+      const result = await welcomeSchema.findOne({ _id: guild.id });
+      if (!result) {
+        console.log("Okay");
+
+        const exampleEmbed = new MessageEmbed()
+          .setColor("#0099ff")
+          .setTitle("A new member has joined our guild !!")
+          .setAuthor({
+            name: user.tag,
+            iconURL: user.displayAvatarURL(),
+          })
+          .setDescription(
+            `Hello ${user.username} , Welcome to ${
+              guild.name
+            }. I am the ${`Expert waffle`}. Follow the rules, get some roles , and have fun.`
+          )
+          .setFooter({
+            text: `ID: ${user.id}`,
+          })
+          .setTimestamp();
+
+        channel.send({ embeds: [exampleEmbed] });
+      } else {
+        onJoin(message.member);
+      }
+    });
   });
 
-  client.on("guildMemberAdd", (member) => {
-    onJoin(member);
+  client.on("guildMemberAdd", async (member) => {
+    // const { user, guild } = member;
+
+    await mongo().then(async (mongoose) => {
+      const { user, guild } = message.member;
+
+      const result = await welcomeSchema.findOne({ _id: guild.id });
+
+      if (!result) {
+        console.log("Okay");
+
+        const exampleEmbed = new MessageEmbed()
+          .setColor("#0099ff")
+          .setTitle("A new member has joined our guild !!")
+          .setAuthor({
+            name: user.tag,
+            iconURL: user.displayAvatarURL(),
+          })
+          .setDescription(
+            `Hello ${user.username} , Welcome to ${guild.name}. I am the Expert-waffle, summon me for any help. 
+            Follow the rules, get some roles , and have fun.`
+          )
+          .setFooter({
+            text: `ID: ${user.id}`,
+          })
+          .setTimestamp();
+
+        channel.send({ embeds: [exampleEmbed] });
+
+        return;
+      } else {
+        onJoin(message.member);
+      }
+    });
   });
 };
