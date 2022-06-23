@@ -1,3 +1,6 @@
+![Waffle](https://user-images.githubusercontent.com/72851613/175225056-2a8d8559-f580-403f-9f9e-33b97d27a41f.png)
+
+
 # What's The-Expert-Waffle ? 🥑
 
 **The Expert Waffle is an Opensource moderation bot with awesome customixation features yet simple to use than most other bots**
